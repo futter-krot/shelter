@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{post.name}}</h1>
+
+{% if post.photo %}
+	<p><img class="img-article-left thumb" style="height: 150px;" src="http:\\127.0.0.1:8000\static\images\{{post.photo}}"></p>
+{% endif %}
+{{post.description|linebreaks}}
+	<h1>Понравилось животное?</h1>
+	<p>Не стесняйся забрать домой!</p>
+{% endblock %}

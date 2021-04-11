@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+	{% for p in posts %}
+			<li><div class="article-panel">
+	<p class="first">Порода: {{p.breed}}</p>
+	<p class="last">Дата: {{p.found|date:"d-m-Y H:i:s"}}</p>
+</div>
+
+{% if p.photo %}
+	<p><img class="img-article-left thumb" style="height: 150px;" src="static/images/{{p.photo}}"></p>
+{% endif %}
+
+				<h2>{{p.name}}</h2>
+	{% autoescape on %}
+	{{p.description|linebreaks|truncatewords:50}}
+	{% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="show/{{p.pk}}">Осмотреть животное</a></p>
+			</li>
+	{% endfor %}
+</ul>
+{% endblock %}
