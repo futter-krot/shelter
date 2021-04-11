@@ -5,7 +5,8 @@ from django.http.response import HttpResponseRedirect
 from shelter.models import Animal
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from shelter.forms import AddPostForm
 # Create your views here.
 menu = [{'title': "О питомнике", 'url_name': 'about'},
         {'title': "Забрать домой", 'url_name': 'add_page'},
@@ -29,5 +30,15 @@ class ShowAnimal(DetailView):
     context_object_name = 'post'
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        return context
+class AddAnimal(CreateView):
+    form_class = AddPostForm
+    template_name = 'addpage.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Добавление животного'
         context['menu'] = menu
         return context
